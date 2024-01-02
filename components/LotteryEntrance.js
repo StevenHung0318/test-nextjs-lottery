@@ -2,7 +2,7 @@ import { contractAddresses, abi } from "../constants"
 // dont export from moralis when using react
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { useEffect, useState } from "react"
-import { useNotification } from "web3uikit"
+import { useNotification, NotificationProvider } from "web3uikit"
 import { ethers } from "ethers"
 
 export default function LotteryEntrance() {
@@ -92,7 +92,7 @@ export default function LotteryEntrance() {
     const handleNewNotification = () => {
         dispatch({
             type: "info",
-            message: "Transaction Complete!",
+            message: "Transaction Complete!!!",
             title: "Transaction Notification",
             position: "topR",
             icon: "bell",
@@ -102,7 +102,7 @@ export default function LotteryEntrance() {
     const handleSuccess = async (tx) => {
         try {
             await tx.wait(1)
-            updateUIValues()
+            updateUIValues() // rerender
             handleNewNotification(tx)
         } catch (error) {
             console.log(error)
@@ -124,11 +124,13 @@ export default function LotteryEntrance() {
                                 onError: (error) => console.log(error),
                             })
                         }
-                        disabled={isLoading || isFetching}
+                        disabled={isLoading || isFetching} // when button is Loading or Fetching -> disable the button
                     >
-                        {isLoading || isFetching ? (
+                        {isLoading || isFetching ? ( // disable style
+                            // if loading...
                             <div className="animate-spin spinner-border h-8 w-8 border-b-2 rounded-full"></div>
                         ) : (
+                            // if not loading...
                             "Enter Raffle"
                         )}
                     </button>
