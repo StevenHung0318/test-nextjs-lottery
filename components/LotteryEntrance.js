@@ -2,7 +2,7 @@ import { contractAddresses, abi } from "../constants"
 // dont export from moralis when using react
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { useEffect, useState } from "react"
-import { useNotification, NotificationProvider } from "web3uikit"
+import { useNotification, NotificationProvider } from "@web3uikit/core"
 import { ethers } from "ethers"
 
 export default function LotteryEntrance() {
@@ -91,11 +91,11 @@ export default function LotteryEntrance() {
 
     const handleNewNotification = () => {
         dispatch({
-            type: "info",
+            type: "success",
             message: "Transaction Complete!!!",
             title: "Transaction Notification",
             position: "topR",
-            icon: "bell",
+            icon: "",
         })
     }
 
